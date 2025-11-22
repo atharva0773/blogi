@@ -3,7 +3,7 @@ import dotenv from 'dotenv'
 import path from 'path'
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
-import { checkForAuthenticationsCookie } from "./middelware/authenticatin.js";
+import { checkForAuthenticationsCookie } from "./middleware/authentication.js";
 import userRoute from './routes/router-user.js'
 import blogRouter from './routes/router-blog.js'
 
