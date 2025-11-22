@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head') %>
+    <title><%= blog.title %></title>
+</head>
+
+<body>
+    <%- include('./partials/nav') %>
+
+    <!-- Blog Header -->
+    <div class="container mt-4 d-flex align-items-center">
+        <img src="<%= blog.createdBy.profileImageURL %>"
+            style="width:50px; height:50px; border-radius:50%; object-fit:cover;" alt="">
+        <span class="ms-3 fw-bold">
+            <%= blog.createdBy.fullName %>
+        </span>
+    </div>
+
+    <!-- Blog Content -->
+    <div class="container mt-4">
+        <h1><%= blog.title %></h1>
+
+        <% if (user && user._id == blog.createdBy._id.toString()) { %>
+        <form action="/blog/<%= blog._id %>?_method=DELETE" method="POST" class="mt-2">
+            <button class="btn btn-danger btn-sm"
+                onclick="return confirm('Are you sure you want to delete this blog?')">
+                Delete Blog
+            </button>
+        </form>
+        <% } %>
+
+        <img src="<%= blog.coverImageURL %>" class="img-fluid mt-3"
+            style="max-width:700px; border-radius:10px;" alt="Blog Image">
+
+        <p class="mt-4" style="white-space:pre-wrap; font-size:1.1rem;">
+            <%= blog.body %>
+        </p>
+    </div>
+
+    <!-- Comments Section -->
+    <div class="container mt-5">
+        <h2>Comments (<%= comments.length %>)</h2>
+
+        <!-- Correct Comment Form -->
+        <% if (user) { %>
+        <form action="/blog/comment/<%= blog._id %>" method="POST">
+            <div class="mb-3 mt-3">
+                <input 
+                    type="text" 
+                    name="content" 
+                    class="form-control" 
+                    placeholder="Write a comment..."
+                    required
+                >
+            </div>
+            <button class="btn btn-primary btn-sm">Add Comment</button>
+        </form>
+        <% } %>
+
+        <!-- Comment List -->
+        <div class="mt-4">
+            <% comments.forEach(comment=> { %>
+            <div class="d-flex align-items-start mb-3 p-2" style="border-bottom:1px solid #eee;">
+                <img src="<%= comment.createdBy.profileImageURL %>"
+                    style="width:45px; height:45px; border-radius:50%; object-fit:cover;">
+
+                <div class="ms-3">
+                    <h6 class="mb-1"><%= comment.createdBy.fullName %></h6>
+                    <p class="mb-0"><%= comment.content %></p>
+                </div>
+            </div>
+            <% }) %>
+        </div>
+    </div>
+
+    <%- include('./partials/script') %>
+</body>
+</html>
