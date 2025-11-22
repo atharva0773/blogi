@@ -6,14 +6,14 @@ import cookieParser from "cookie-parser";
 import { checkForAuthenticationsCookie } from "./middelware/authenticatin.js";
 import userRoute from './routes/router-user.js'
 import blogRouter from './routes/router-blog.js'
-import methodOverride from "method-override";
+
 
 import Blog from "./models/models-blog.js";
 import User from "./models/models-user.js";
 const app =  express();
 dotenv.config();
 const PORT = process.env.PORT || 4001;
-mongoose.connect('mongodb+srv://atharvasingh0072_db_user:MuImiv05t23AnsSp@cluster0.4ufsv67.mongodb.net/blogi01 ')
+mongoose.connect(process.env.MONGODB_URL)
 .then((e)=> console.log("mongoDB is connected"))
 .catch((e)=>console.log("mongoDB is not connected"));
 app.set('view engine','ejs')

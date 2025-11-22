@@ -1,8 +1,12 @@
 import JWT from "jsonwebtoken";
 
-const secret = "superMan!123";
+import dotenv from "dotenv";
+dotenv.config();
+const secret = process.env.JWT_SECRET;
 
-// Create JWT token
+
+
+// Create JWT tokenrs
 export function createTokenForUser(user) {
   const payload = {
     _id: user._id,
