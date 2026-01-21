@@ -1,52 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <%- include('./partials/head') %>
-   <title>Homepage</title>
+  <%- include('./partials/head') %>
+  <title>Homepage</title>
 </head>
 
 <body>
-   <%- include('./partials/nav') %>
+  <%- include('./partials/nav') %>
 
-   <div class="container mt-3 gap-4 d-flex flex-column align-items-center">
+  <div class="container mt-4">
+    <div class="row justify-content-center g-4">
 
-     <% blogs.forEach(blog => { %>
+      <% blogs.forEach(blog => { %>
 
-       <div class="card mb-4" style="width: 38rem;">
+        <!-- Responsive column -->
+        <div class="col-12 col-md-10 col-lg-8">
 
-         <h4 class="p-3"><%= blog.title %></h4>
+          <div class="card h-100">
 
-         <!-- FIXED IMAGE SIZE -->
-         <div style="width: 100%; height: 250px; overflow: hidden;">
-           <img 
-             src="<%= blog.coverImageURL %>" 
-             style="width: 100%; height: 100%; object-fit: cover;"
-             alt="Blog Image"
-           />
-         </div>
+            <h4 class="p-3 mb-0"><%= blog.title %></h4>
 
-         <div class="card-body">
+            <!-- Responsive Image -->
+            <div class="ratio ratio-16x9">
+              <img 
+                src="<%= blog.coverImageURL %>" 
+                class="img-fluid rounded-0"
+                alt="Blog Image"
+                style="object-fit: cover;"
+              />
+            </div>
 
-           <p class="card-text">
-             <%= blog.body.length > 150 
-                ? blog.body.substring(0, blog.body.lastIndexOf(" ", 150)) + "..." 
-                : blog.body 
-             %>
-           </p>
+            <div class="card-body">
 
-           <!-- VIEW BUTTON -->
-           <a href="/blog/<%= blog._id %>" class="btn btn-primary btn-sm">View</a>
+              <p class="card-text">
+                <%= blog.body.length > 150 
+                  ? blog.body.substring(0, blog.body.lastIndexOf(" ", 150)) + "..." 
+                  : blog.body 
+                %>
+              </p>
 
-           
+              <a href="/blog/<%= blog._id %>" class="btn btn-primary btn-sm">
+                View
+              </a>
 
-         </div>
+            </div>
+          </div>
 
-       </div>
+        </div>
 
-     <% }) %>
+      <% }) %>
 
-   </div>
+    </div>
+  </div>
 
-   <%- include('./partials/script') %>
+  <%- include('./partials/script') %>
 </body>
 </html>
