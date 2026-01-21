@@ -11,7 +11,7 @@
     <!-- Blog Header -->
     <div class="container mt-4 d-flex align-items-center">
         <img src="<%= blog.createdBy.profileImageURL %>"
-            style="width:50px; height:50px; border-radius:50%; object-fit:cover;" alt="">
+            style="width:50px; height:50px; border-radius:50%; object-fit:contain;" alt="">
         <span class="ms-3 fw-bold">
             <%= blog.createdBy.fullName %>
         </span>
@@ -63,7 +63,7 @@
             <% comments.forEach(comment=> { %>
             <div class="d-flex align-items-start mb-3 p-2" style="border-bottom:1px solid #eee;">
                 <img src="<%= comment.createdBy.profileImageURL %>"
-                    style="width:45px; height:45px; border-radius:50%; object-fit:cover;">
+                    style="width:45px; height:45px; border-radius:50%; object-fit:contain;">
 
                 <div class="ms-3">
                     <h6 class="mb-1"><%= comment.createdBy.fullName %></h6>
